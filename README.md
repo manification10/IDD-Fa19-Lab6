@@ -1,6 +1,6 @@
 # ChatBot
 
-*A lab report by John Q. Student*
+*Lab report by Ananya Paul Student*
 
 ## In this Report
 
