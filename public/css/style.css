@@ -4,7 +4,10 @@
 }
 
 body {
-	background-color: #f0db4f;
+	/*background-image: url("/images/dairy.png");*/
+	background-position: center; /* Center the image */
+	background-repeat: no-repeat; /* Do not repeat the image */
+	background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 h1, p {

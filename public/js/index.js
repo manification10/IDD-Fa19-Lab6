@@ -36,8 +36,8 @@ socket.on('question', function(msg) {
 });
 
 socket.on('changeBG', function(msg) {
-  console.log('Changeing backgroundColor to:', msg);
-  document.body.style.backgroundColor = msg;
+  console.log('Changeing backgroundImage to:', msg);
+  document.body.style.backgroundImage = "url('../images/'+msg)"
 });
 
 socket.on('changeFont', function(msg) {

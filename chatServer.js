@@ -27,75 +27,107 @@ http.listen(serverPort, function() {
 // as long as someone is connected, listen for messages
 io.on('connect', function(socket) {
   console.log('a new user connected');
-  var questionNum = 0; // keep count of question, used for IF condition.
+  var questionCase = "name"; // keep count of question, used for IF condition.
   socket.on('loaded', function() { // we wait until the client has loaded and contacted us that it is ready to go.
 
-    socket.emit('answer', "Hey, hello I am \"___*-\" a simple chat bot example."); //We start with the introduction;
-    setTimeout(timedQuestion, 5000, socket, "What is your name?"); // Wait a moment and respond with a question.
+    socket.emit('answer', "Hi, I am a chatbot for chloemoomoomoo. AMA."); //We start with the introduction;
+    setTimeout(timedQuestion, 5000, socket, "Before we moo, What can I call you?"); // Wait a moment and respond with a question.
 
   });
   socket.on('message', (data) => { // If we get a new message from the client we process it;
     console.log(data);
-    questionNum = bot(data, socket, questionNum); // run the bot function with the new message
+    questionCase = bot(data, socket, questionCase); // run the bot function with the new message
   });
   socket.on('disconnect', function() { // This function  gets called when the browser window gets closed
     console.log('user disconnected');
   });
 });
+
 //--------------------------CHAT BOT FUNCTION-------------------------------//
-function bot(data, socket, questionNum) {
+
+
+function bot(data, socket, questionCase) {
   var input = data; // This is generally really terrible from a security point of view ToDo avoid code injection
   var answer;
   var question;
   var waitTime;
 
+  console.log("1  *****from bot",input, questionCase);
   /// These are the main statments that make up the conversation.
-  if (questionNum == 0) {
-    answer = 'Hello ' + input + ' :-)'; // output response
-    waitTime = 5000;
-    question = 'How old are you?'; // load next question
-  } else if (questionNum == 1) {
-    answer = 'Really, ' + input + ' years old? So that means you were born in: ' + (2018 - parseInt(input)); // output response
-    waitTime = 5000;
-    question = 'Where do you live?'; // load next question
-  } else if (questionNum == 2) {
-    answer = 'Cool! I have never been to ' + input + '.';
-    waitTime = 5000;
-    question = 'Whats your favorite color?'; // load next question
-  } else if (questionNum == 3) {
-    answer = 'Ok, ' + input + ' it is.';
-    socket.emit('changeBG', input.toLowerCase());
-    waitTime = 5000;
-    question = 'Can you still read the font?'; // load next question
-  } else if (questionNum == 4) {
-    if (input.toLowerCase() === 'yes' || input === 1) {
-      answer = 'Perfect!';
-      waitTime = 5000;
-      question = 'Whats your favorite place?';
-    } else if (input.toLowerCase() === 'no' || input === 0) {
-      socket.emit('changeFont', 'white'); /// we really should look up the inverse of what we said befor.
-      answer = ''
-      question = 'How about now?';
-      waitTime = 0;
-      questionNum--; // Here we go back in the question number this can end up in a loop
-    } else {
-      question = 'Can you still read the font?'; // load next question
-      answer = 'I did not understand you. Could you please answer "yes" or "no"?'
-      questionNum--;
-      waitTime = 5000;
-    }
-    // load next question
-  } else {
-    answer = 'I have nothing more to say!'; // output response
-    waitTime = 0;
-    question = '';
-  }
+  questionCase = processInput(input);
+  console.log("2  *****from bot",input, questionCase);
 
+  switch(questionCase) {
+    case "name":
+      answer = 'Hello ' + input + ' 🐮'; // output response
+      waitTime = 5000;
+      question = 'Ask Moo Anything!'; // load next question
+      break;
+    case "yourself":
+      answer = "My name is Mardhika, I’m a PhD student at Cornell Tech. I'm interested in blockmoo and deep mooning."
+      waitTime = 5000;
+      question = 'Ask Moo Anything!'; // load next question
+      break;
+    case "daily_food":
+      answer = "I drink half and half on my tough days and bitcoins on regular days."
+      waitTime = 5000;
+      question = 'Ask Moo Anything!'; // load next question
+      break;
+    case "favorite_food":
+      answer = "I louu Mootiful Roosevelt Island pasture."
+      waitTime = 5000;
+      question = 'Ask Moo Anything!'; // load next question
+      break;
+    case "mood":
+      answer = "I always feel mooti-ful."
+      waitTime = 5000;
+      question = 'Ask Moo Anything!'; // load next question
+      break;
+    case "day":
+      answer = "I usually moo in the morning, a little moo in the afternoon and then moo again later in the evening. It’s hard."
+      waitTime = 5000;
+      question = 'Ask Moo Anything!'; // load next question
+      break;
+    case "weekends":
+      socket.emit('changeBG', '/images/mardhika.png');
+      answer = "On the weekends, I chill and moo."
+      waitTime = 5000;
+      question = 'Ask Moo Anything!'; // load next question
+      break;
+    case "bye":
+      answer = "It was nice talking to you, Find me on Instagram."
+      waitTime = 0;
+      question = '';
+      break;
+  }
 
   /// We take the changed data and distribute it across the required objects.
   socket.emit('answer', answer);
   setTimeout(timedQuestion, waitTime, socket, question);
-  return (questionNum + 1);
+  // return (questionNum + 1);
+  return questionCase;
+}
+function processInput(input)
+{
+  input = input.toLowerCase();
+  var questionCase = "name";
+  console.log("input data: ----", input);
+
+  if (input.includes("yourself"))
+    questionCase = "yourself";
+  else if (input.includes("favorite food"))
+    questionCase =  "favorite_food";
+  else if (input.includes("drink") || input.includes("food") || input.includes("eat"))
+    questionCase = "daily_food";
+  else if (input.includes("mood"))
+    questionCase =  "mood";
+  else if(input.includes("day") || input.includes("daily"))
+    questionCase = "day";
+  else if (input.includes("weekends"))
+    questionCase = "weekends";
+  else if (input.includes("bye") || input.includes("thank"))
+    questionCase = "bye";
+  return questionCase;
 }
 
 function timedQuestion(socket, question) {
