@@ -64,37 +64,43 @@ function bot(data, socket, questionCase) {
       question = 'Ask Moo Anything!'; // load next question
       break;
     case "yourself":
+      socket.emit('changeBG', "url('images/mardhika.png')");
       answer = "My name is Mardhika, I’m a PhD student at Cornell Tech. I'm interested in blockmoo and deep mooning."
       waitTime = 5000;
       question = 'Ask Moo Anything!'; // load next question
       break;
     case "daily_food":
+      socket.emit('changeBG', "url('images/dairy.png')");
       answer = "I drink half and half on my tough days and bitcoins on regular days."
       waitTime = 5000;
       question = 'Ask Moo Anything!'; // load next question
       break;
     case "favorite_food":
+      socket.emit('changeBG', "url('images/sitting.png')");
       answer = "I louu Mootiful Roosevelt Island pasture."
       waitTime = 5000;
       question = 'Ask Moo Anything!'; // load next question
       break;
     case "mood":
+      socket.emit('changeBG', "url('images/afternoon.png')");
       answer = "I always feel mooti-ful."
       waitTime = 5000;
       question = 'Ask Moo Anything!'; // load next question
       break;
     case "day":
+      socket.emit('changeBG', "url('images/tabletennis.png')");
       answer = "I usually moo in the morning, a little moo in the afternoon and then moo again later in the evening. It’s hard."
       waitTime = 5000;
       question = 'Ask Moo Anything!'; // load next question
       break;
     case "weekends":
-      socket.emit('changeBG', '/images/mardhika.png');
+      socket.emit('changeBG', '/images/weekends.png');
       answer = "On the weekends, I chill and moo."
       waitTime = 5000;
       question = 'Ask Moo Anything!'; // load next question
       break;
     case "bye":
+      socket.emit('changeBG', "url('images/lazing.png')");
       answer = "It was nice talking to you, Find me on Instagram."
       waitTime = 0;
       question = '';
