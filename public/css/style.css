@@ -13,8 +13,9 @@ body {
 h1, p {
 	font-family: sans-serif;
 	text-align: center;
-	color: #323330;
+	color: #f47171;
 	font-size:  100px;
+	text-shadow: -2px 0 white, 0 2px white, 2px 0 #fffefe, 0 -2px white;
 }
 
 

@@ -36,8 +36,11 @@ socket.on('question', function(msg) {
 });
 
 socket.on('changeBG', function(msg) {
+  var audio = new Audio('sounds/cow.mp3');
+  audio.play();
   console.log('Changing BG:', msg);
-  document.body.style.background = msg;
+  document.body.style.background = msg + "no-repeat center";
+  document.body.style.backgroundSize = "cover";
 });
 
 socket.on('changeFont', function(msg) {
