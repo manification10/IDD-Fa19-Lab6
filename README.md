@@ -1,6 +1,6 @@
 # ChatBot
 
-*MooBotby Ananya Paul Student*
+*MooBot by Ananya Paul Student*
 
 
 ## Make the ChatBot your own
