@@ -15,7 +15,10 @@ I also added audio to make the experience more fun.
 ## Record someone trying out your ChatBot
 
 **Using a phone or other video device, record someone trying out your ChatBot. Upload that video to this repository and link to it here!**
-[MooBot in Acttion](https://youtu.be/P7QcNx9g67c)
+<br>
+[MooBot in Action](https://youtu.be/P7QcNx9g67c)
+<br>
+[MooBot Code](https://github.com/manification10/IDD-Fa19-Lab6/)
 
 
 ---
